@@ -1,0 +1,22 @@
+alter Procedure Inventory(
+@mode int,
+@ProductName varchar(50),
+@QtyIn decimal=null,
+@QtyOut decimal=null,
+@DateCreated datetime=null,
+@InvID int=null)
+as
+begin
+if(@mode=1)
+begin
+select * From tbl_Inventory where Product_Name=@ProductName
+end
+else if(@mode=2)
+begin
+insert into tbl_Inventory(Product_Name,QuantityIn,QuantityOut,Datecreated) values(@ProductName,@QtyIn,@QtyOut,@DateCreated)
+end
+else if(@mode=3)
+begin
+update tbl_Inventory set Product_Name=@ProductName,QuantityIn=@QtyIn,QuantityOut=@QtyOut where Inventory_ID=@InvID
+end
+end
